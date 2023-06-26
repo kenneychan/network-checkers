@@ -30,7 +30,7 @@ let turnState
 let winner
 let canJumpAgain
 let numPlayers
-// let whoWentFirst
+let whoWentFirst
 let boardRows
 let boardColumns
 let boardSize
@@ -59,10 +59,12 @@ const titleEl = document.querySelector('#title')
 let ws
 let wsMessage
 // let wsMessages = 'Dope<br/>'
-let wsMessageCnt = 0
+// let wsMessageCnt = 0
 
 const wsGetMessage = () => wsMessage
-const wsSetMessage = (msg) => {wsMessage = msg}
+const wsSetMessage = (msg) => {
+  wsMessage = msg
+}
 
 const setupWS = async () => {
   ws = new WebSocket('ws://localhost:8082')
@@ -117,7 +119,9 @@ let webRTCLocalDataChannel
 let webRTCLocalMessage
 
 const webRTCLocalGetMessage = () => webRTCLocalMessage
-const webRTCLocalSetMessage = (msg) => {webRTCLocalMessage=msg}
+const webRTCLocalSetMessage = (msg) => {
+  webRTCLocalMessage = msg
+}
 
 const setupLocalRTC = async () => {
   webRTCLocalConnection = new RTCPeerConnection()
@@ -160,7 +164,9 @@ let webRTCRemoteDataChannel
 let webRTCRemoteMessage
 
 const webRTCRemoteGetMessage = () => webRTCRemoteMessage
-const webRTCRemoteSetMessage = (msg) => { webRTCRemoteMessage = msg}
+const webRTCRemoteSetMessage = (msg) => {
+  webRTCRemoteMessage = msg
+}
 
 const setupRemoteRTC = async (webRTCLocalOffer) => {
   // console.log('webRTCLocalOffer', webRTCLocalOffer)
@@ -207,7 +213,6 @@ const webRTCRemoteSendData = (data) => {
 let genericSendDataNoReply = wsSendMessageNoReply
 let genericGetMessage = wsGetMessage
 let genericSetMessage = wsSetMessage
-
 
 /* ----- event listeners ----- */
 
@@ -461,10 +466,10 @@ const getRowColumn = (squareIdx) => [
 const isKing = (piece) => Math.abs(piece) === 2
 
 const initializeModel = () => {
-  // if (!whoWentFirst) {
-  //     whoWentFirst = -1
-  boardRows = INITIAL_BOARD_SIZE
-  // }
+  if (!whoWentFirst) {
+    whoWentFirst = -1
+    boardRows = INITIAL_BOARD_SIZE
+  }
   boardColumns = boardRows
   boardSize = boardRows * boardColumns
   initialPieces = Math.floor((boardRows / 2 - 1) * (boardColumns / 2))
@@ -592,14 +597,12 @@ const validateSpaceMove = (square, squareIdx, moves) => {
           canMoves[squareIdx] = square.piece
           moves.push({ move: square.diagonals[diagonolIdx], jumpPieces: [] })
         } else {
-
           // eslint-disable-next-line no-lonely-if
           if (
             (square.piece === -1 &&
               square.diagonals[diagonolIdx] < squareIdx) ||
             (square.piece === 1 && square.diagonals[diagonolIdx] > squareIdx)
           ) {
-
             canMoves[squareIdx] = square.piece
             moves.push({ move: square.diagonals[diagonolIdx], jumpPieces: [] })
           } else {
@@ -624,7 +627,6 @@ const validateJumpMove = (square, squareIdx, moves) => {
       diagonolIdx < square.diagonals.length;
       diagonolIdx++
     ) {
-
       if (
         square.diagonals[diagonolIdx] !== -1 &&
         squares[square.diagonals[diagonolIdx]].piece &&
@@ -743,7 +745,9 @@ const computerAI = async () => {
   // select a random move for piece
   const moveTo = Math.floor(Math.random() * placesPieceCanMove.length)
 
-  titleEl.innerHTML = `Moved piece ${computerMovesPiece} moveTo ${placesPieceCanMove[moveTo].move}`
+  titleEl.innerHTML = `Moved piece ${getRowColumn(
+    computerMovesPiece
+  )} moveTo ${getRowColumn(placesPieceCanMove[moveTo].move)}`
   await sleep(1000)
   pieceSelected = computerMovesPiece
   render()
@@ -781,7 +785,6 @@ const findWinner = () => {
     else if (move < 0) canMoveNegative++
   })
   if (canMoveNegative === 0 && canMovePositive === 0) winner = 'T'
-
 }
 
 const renderBoard = () => {
@@ -863,7 +866,6 @@ const render = () => {
   renderPieces()
   renderButtons()
   renderPossibleMoves()
-
 }
 
 initializeGame()

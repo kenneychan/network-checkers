@@ -16,7 +16,7 @@ Technology Used
 - WebRTC
 
 Game Link
-![Checkers](https://kenneychan.github.io/network-checkers/)
+- [Checkers](https://kenneychan.github.io/network-checkers/)
 
 Stretch
 - variable size board
