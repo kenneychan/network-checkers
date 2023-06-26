@@ -2,6 +2,8 @@
 Wireframe
 ![drawing](https://docs.google.com/drawings/d/1t-alEifpDqC_VvQFhn6tdtK8j26yLq_rrAol4EaUwCg/export/png)
 
+![Checkers Screenshot](./Checkers.png)
+
 MVP
 - place peices
 - move peice
