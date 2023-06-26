@@ -8,6 +8,14 @@ MVP
 - adding/removing peices
 - calculate winner
 
+Technology Used
+- JavaScript, HTML, CSS
+- WebSocket
+- WebRTC
+
+Game Link
+![Checkers](https://kenneychan.github.io/network-checkers/)
+
 Stretch
 - variable size board
 - 1 player mode
@@ -23,6 +31,6 @@ WebRTC used
 - https://www.youtube.com/watch?v=FExZvpVvYxA
 
 Next Steps
-- Deply WebSocket server to https://www.heroku.com/
+- Deploy WebSocket server to https://www.heroku.com/
 
 
